@@ -1,9 +1,41 @@
 <template>
-  <!-- 默认600px*400px -->
-  <!-- <v-chart
-    :options="data"
-  ></v-chart> -->
-  <ve-line :data="chartData"></ve-line>
+  <div class="sales-view">
+    <el-card shadow="hover">
+      <template v-slot:header>
+        <div class="menu-wrapper">
+          <el-menu mode="horizontal">
+            <el-menu-item>销售额</el-menu-item>
+            <el-menu-item>访问量</el-menu-item>
+            <el-menu-item>
+              <el-radio-group v-model="radio1">
+                <el-radio-button label="上海"></el-radio-button>
+                <el-radio-button label="北京"></el-radio-button>
+                <el-radio-button label="广州"></el-radio-button>
+                <el-radio-button label="深圳"></el-radio-button>
+              </el-radio-group>
+            </el-menu-item>
+            <el-menu-item>
+              <el-date-picker
+                v-model="value2"
+                type="daterange"
+                align="right"
+                unlink-panels
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                :picker-options="pickerOptions">
+              </el-date-picker>
+            </el-menu-item>
+          </el-menu>
+        </div>
+      </template>
+      <template>
+        <div>
+          下方
+        </div>
+      </template>
+    </el-card>
+  </div>
 </template>
 
 <script>
@@ -11,24 +43,34 @@
     name:'SalesView',
     data () {
       return {
-        data:{
-          xAxis:{},
-          yAxis:{},
-          series:[{
-            type:'line',
-            data:[100, 313, 456, 567]
+        radio1: '上海',
+        value2:'',
+        pickerOptions: {
+          shortcuts: [{
+            text: '最近一周',
+            onClick (picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
+            }
+          }, {
+            text: '最近一个月',
+            onClick (picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
+            }
+          }, {
+            text: '最近三个月',
+            onClick (picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
+            }
           }]
-        },
-        chartData: {
-          columns: ['日期', '销售额'],
-          rows: [
-            { '日期': '1月1日', '销售额': 123 },
-            { '日期': '1月2日', '销售额': 1223 },
-            { '日期': '1月3日', '销售额': 2123 },
-            { '日期': '1月4日', '销售额': 4123 },
-            { '日期': '1月5日', '销售额': 3123 },
-            { '日期': '1月6日', '销售额': 7123 }
-          ]
         }
       }
     }
@@ -36,5 +78,10 @@
 </script>
 
 <style lang="scss" scoped>
+.sales-view{
+  margin-top: 20px;
+}
+.menu-wrapper{
 
+}
 </style>
