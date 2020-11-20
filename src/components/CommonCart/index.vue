@@ -14,32 +14,37 @@
 
 <script>
   export default {
-    props:{
-      title:String,
-      value:String,
+    props: {
+      title: String,
+      value: [String, Number]
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
-  .title{
+  .title {
     font-size: 12px;
     color: #999;
   }
-  .value{
+
+  .value {
     font-size: 25px;
     color: #000;
     margin-top: 5px;
     letter-spacing: 1px; // 单个词之间得间距
   }
-  .chart{
+
+  .chart {
     height: 50px;
   }
-  .line{
+
+  .line {
     margin: 10px 0;
     border-top: 1px solid #eee;
   }
-  .total{
+
+  .total {
     font-size: 12px;
     color: #666;
   }
@@ -47,26 +52,29 @@
 </style>
 
 <style lang="scss">
-.emphasis{
-  margin-left: 5px;
-  color:#333;
-  font-weight: 700;
+  .emphasis {
+    margin-left: 5px;
+    color: #333;
+    font-weight: 700;
 
-}
-.increase{
-  width: 0;
-  height: 0;
-  border-width: 3px;
-  border-color: transparent transparent red transparent;
-  border-style: solid;
-  margin: 0 0 3px 5px;
-}
-.decrease{
-  width: 0;
-  height: 0;
-  border-width: 3px;
-  border-color: green transparent transparent transparent;
-  border-style: solid;
-  margin: 3px 0 0 5px;
-}
+  }
+
+  .increase {
+    width: 0;
+    height: 0;
+    border-width: 3px;
+    border-color: transparent transparent red transparent;
+    border-style: solid;
+    margin: 0 0 3px 5px;
+  }
+
+  .decrease {
+    width: 0;
+    height: 0;
+    border-width: 3px;
+    border-color: green transparent transparent transparent;
+    border-style: solid;
+    margin: 3px 0 0 5px;
+  }
+
 </style>

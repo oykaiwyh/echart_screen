@@ -1,5 +1,17 @@
 module.exports = {
   lintOnSave: false,
+  devServer:{
+    proxy:{
+      '/api':{
+        ws: false,
+        target: 'http://101.133.174.173:5001',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    }
+  },
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
     // css热更新需要变更为false

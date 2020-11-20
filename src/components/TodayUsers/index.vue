@@ -1,16 +1,13 @@
 <template>
   <div>
-    <common-cart
-      title="今日交易用户数"
-      value="141414"
-    >
+    <common-cart title="今日交易用户数" :value="orderUser">
       <template>
         <!-- <div id="today-users-chart" :style="{width:'100%',height:'100%'}"></div> -->
         <v-chart :options="getOptions()"></v-chart>
       </template>
       <template v-slot:footer>
         <span>退货率 </span>
-        <span class="emphasis">5.1%</span>
+        <span class="emphasis">{{returnRate}}</span>
       </template>
     </common-cart>
   </div>
@@ -18,38 +15,42 @@
 
 <script>
   import commonCardMixin from '@/mixins/commonCardMixin'
-  export default {
-    mixins:[commonCardMixin],
+  import commonDataMixin from '@/mixins/commonDataMixin'
 
-    methods:{
-      getOptions () {
+  export default {
+    mixins: [commonCardMixin, commonDataMixin],
+    methods: {
+      getOptions() {
         return {
-          color:'#3398DB',
-          xAxis:{
-            type:'category',
-            show:false,
-            data:['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00'],
-            boundaryGap:false // 图标距离画布两侧的间距 默认 true
+          color: '#3398DB',
+          tooltip: {},
+          xAxis: {
+            type: 'category',
+            show: false,
+            data: this.orderUserTrendAxis,
+            boundaryGap: false // 图标距离画布两侧的间距 默认 true
           },
-          yAxis:{
-            show:false
+          yAxis: {
+            show: false
           },
-          series:[{
-            type:'bar',
-            data:[620, 131, 435, 657, 324, 536, 758, 132, 456, 675], // 柱状图宽度
-            barWidth:'60%'
+          series: [{
+            type: 'bar',
+            name: '用户实时交易量',
+            data: this.orderUserTrend, // 柱状图宽度
+            barWidth: '60%'
           }],
-          grid:{
-            top:0,
-            bottom:0,
-            left:0,
-            right:0
+          grid: {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0
           }
         }
       }
     }
 
   }
+
 </script>
 
 <style lang="scss" scoped>
